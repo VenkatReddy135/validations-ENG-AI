@@ -1,0 +1,43 @@
+<h1 class="text-center text-success">Engineering AI</h1>
+<!-- Search For Title -->
+<h2 class="text-danger ml-3">Search By Title</h2>
+<div class="container-fluid form-group">
+    <input type="search" placeholder="Search By Title" [(ngModel)]="SearchText" class="form-control">
+</div>
+<!-- Displaying the Data which as Fetched from API -->
+<h2 class="text-danger ml-3">JSON Details</h2>
+<div class="container-fluid">
+    <table class="table table-bordered">
+        <tr>
+            <th>Title</th>
+            <th>URL</th>
+            <th>Created_At</th>
+            <th>Author</th>
+        </tr>
+        <tr *ngFor="let List of ListData|Search:SearchText" (click)="Select(List)" data-toggle="modal"
+            data-target="#Data">
+            <td>{{List.title}}</td>
+            <td>{{List.url}}</td>
+            <td>{{List.created_at}}</td>
+            <td>{{List.author}}</td>
+        </tr>
+    </table>
+</div>
+<h2 class="text-danger ml-3" *ngIf="(ListData|Search:SearchText)?.length==0">Title not Found</h2>
+<!-- Displaying the Data in raw JSON Format -->
+<div class="modal" id="Data">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title text-primary">Raw JSON Data</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <pre>{{RawData}}</pre>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
